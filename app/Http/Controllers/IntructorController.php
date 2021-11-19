@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apprentice;
 use Illuminate\Http\Request;
 
 class IntructorController extends Controller
@@ -13,7 +14,8 @@ class IntructorController extends Controller
      */
     public function index()
     {
-        return view('instructor.index');
+        $apprentices=Apprentice::all();
+        return view('instructor.index', compact('apprentices'));
     }
 
     /**
@@ -23,7 +25,7 @@ class IntructorController extends Controller
      */
     public function create()
     {
-        //
+        return view('instructor.create');
     }
 
     /**
@@ -34,9 +36,14 @@ class IntructorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $apprentices = Apprentice::create([
+            'nombre' => $request->input('nombre'),
+            'apellido' => $request->input('apellido'),
+            'correo' => $request->input('correo'),
+            'genero' => $request->input('genero'),
+        ]);
+        return redirect('instructor');
     }
-
     /**
      * Display the specified resource.
      *
@@ -45,7 +52,8 @@ class IntructorController extends Controller
      */
     public function show($id)
     {
-        //
+        $apprentices = Apprentice::find($id);
+        return view('instructor.show', compact('apprentices'));
     }
 
     /**
@@ -56,7 +64,8 @@ class IntructorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $apprentices = Apprentice::find($id);
+        return view('instructor.edit', compact('apprentices'));
     }
 
     /**
@@ -68,7 +77,13 @@ class IntructorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $apprentices = Apprentice::find($id)->update([
+            'nombre' => $request->input('nombre'),
+            'apellido' => $request->input('apellido'),
+            'correo' => $request->input('correo'),
+            'genero' => $request->input('genero'),
+        ]);
+        return redirect('instructor');
     }
 
     /**
@@ -79,6 +94,7 @@ class IntructorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $apprentices = Apprentice::find($id)->delete();
+        return redirect('instructor');
     }
 }

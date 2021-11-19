@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AprendizController;
+use App\Http\Controllers\ApprenticeController;
 use App\Http\Controllers\IntructorController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+
+
 // Route::middleware(['auth:sanctum', 'verified'])->get('/instructor', function () {
 //     return view('instructor.index');
 // })->name('instructor');
-
+//
 Route::resource('instructor', IntructorController::class);
-Route::resource('aprendiz', AprendizController::class);
+Route::resource('apprentice', ApprenticeController::class);
+
+
+
+
